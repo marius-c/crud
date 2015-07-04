@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+require 'vendor/autoload.php';
+
+use Ionut\Crud\Commands\Scaffolding;
+use Symfony\Component\Console\Application;
+
+$console = new Application();
+$console->add(new Scaffolding);
+$console->run();
