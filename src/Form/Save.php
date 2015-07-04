@@ -67,12 +67,12 @@ class Save
 
 		foreach($this->crud->columns->editable() as $column) {
 			if($column->input == 'file') {
-				foreach($row->filesByColumn($column->name) as $file) {
+				foreach($row->attachmentsByColumn($column->name) as $file) {
 					$file->detach();
 				}
 
 				foreach(explode(',', $request[$column->name]) as $id){
-					\App\Models\File::whereId($id)->update([
+					\App\Models\Attachment::whereId($id)->update([
 						'attached_id' => $row->id,
 						'attached_type' => get_class($row),
 						'attached_column' => $column->name,

@@ -14,6 +14,11 @@ return [
 		'locale' => 'en',
 		'fallback_locale' => 'en',
 	],
+    'attachments' => [
+        'upload' => [
+            'url' => '/attachments/upload'
+        ]
+    ],
 	'style' => [
 		'css' => null,
 
