@@ -426,7 +426,7 @@ class Crud
 				// we must throw an exception manually here because if $value
 				// is not a string, PHP will trigger an error right after the
 				// return statement, thus escaping our try/catch.
-				throw new \LogicException(__CLASS__ . "__toString() must return a string");
+				dd('Non-String response received: '.$string);
 			}
 
 			return $string;

@@ -2,6 +2,7 @@
 
 use Ionut\Crud\Application;
 use Ionut\Crud\Html;
+use Ionut\Crud\Table\ColumnView\FileColumnView;
 
 class Column
 {
@@ -131,6 +132,7 @@ class Column
 		if( ! is_null($this->options['visible'])) {
 			$this->options['hidden'] = !$this->options['visible'];
 		}
+
 		if($this->options['hidden'] === true) {
 			$this->options['form'] = $this->options['table'] = false;
 		}
@@ -266,4 +268,16 @@ class Column
 		$label = str_replace(['_', '.'], ' ', $label);
 		return $label;
 	}
+
+    public function getColumnView()
+    {
+        if ($this->options['input'] == 'file') {
+            return new FileColumnView($this);
+        }
+    }
+
+    public function isInlineSupported()
+    {
+        return in_array($this->options['input'], ['checkbox']);
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Ionut\Crud\Crud;
 use Ionut\Crud\Table\Column;
+use Ionut\Crud\Table\ColumnView\FileColumnView;
 
 class Generator
 {
@@ -237,13 +238,21 @@ class Generator
 		foreach ($rows as $row) {
 			$data_row = [];
 			foreach ($this->crud->columns->tableable() as $column) {
+                /** @var Column $column */
+
 				if ($column->expandable) {
 					$value = '<a class="ui blue button expandable" data-expandable-type="' . $column->expandable_type . '" data-target="' . $column->expandable_action->url($row->id) . '"><i class="fa fa-plus-square"></i></a>';
-				} elseif ($column->inline) {
+				}
+                elseif ($column->isInlineSupported() && $column->inline) {
 					$value = $this->getInline($row, $column);
-				} else {
+				}
+                else {
 					$value = $this->crud->getValue($row, $column);
 				}
+
+                if($columnView = $column->getColumnView()) {
+                    $value = $columnView->format($value);
+                }
 
 				if ($column->mutator) {
 					$value = $column->mutator($row, $this->crud);
