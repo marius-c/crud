@@ -66,7 +66,7 @@ class Save
 		}
 
 		foreach($this->crud->columns->editable() as $column) {
-			if($column->input == 'file') {
+			if($column->input == 'file' && $request->has($column->name)) {
 				foreach($row->attachmentsByColumn($column->name) as $file) {
 					$file->detach();
 				}
