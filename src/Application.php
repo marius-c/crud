@@ -240,7 +240,7 @@ class Application extends Container
 	 */
 	private function setPaths()
 	{
-		$this['path.storage'] = __DIR__ . '/../storage';
+		$this['path.storage'] = $this['config']['path.storage'];
 		$this['path.lang'] = __DIR__ . '/../config/lang';
 		$this['path'] = __DIR__ . '/../config';
 	}

@@ -1,6 +1,9 @@
 <?php
 
 return [
+    'path' => [
+        'storage' => __DIR__.'/../storage'
+    ],
 	'view' => [
 		'paths' => [
 			__DIR__.'/../src/View/views'
