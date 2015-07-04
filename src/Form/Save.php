@@ -72,7 +72,8 @@ class Save
 				}
 
 				foreach(explode(',', $request[$column->name]) as $id){
-					\App\Models\Attachment::whereId($id)->update([
+                    $attachmentModel = $this->crud->config['attachments.model'];
+					$attachmentModel::whereId($id)->update([
 						'attached_id' => $row->id,
 						'attached_type' => get_class($row),
 						'attached_column' => $column->name,

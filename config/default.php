@@ -15,6 +15,7 @@ return [
 		'fallback_locale' => 'en',
 	],
     'attachments' => [
+        'model' => 'App\Models\Attachment',
         'upload' => [
             'url' => '/attachments/upload'
         ]
