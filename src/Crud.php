@@ -135,6 +135,8 @@ class Crud
 		$this->form = new Form($this);
 		$this->tableStyle = new Style($this);
 		$this->filters = new Filters($this->options['filters'], $this->request);
+
+		$GLOBALS['crud.title'] = $this->getTitle();
 	}
 
 	/**
