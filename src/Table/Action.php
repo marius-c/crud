@@ -37,6 +37,12 @@ class Action
 		$this->id = strtolower($name);
 	}
 
+	public function setOption($option, $value)
+	{
+		$this->options[$option] = $value;
+		return $this;
+	}
+
 	public function fire($row = null)
 	{
 		if(!$row) {

@@ -93,14 +93,15 @@
 
 @section('js')
     @include('themes.semantic.inc.table.scripts.pagination')
-    @include('global.inc.table.scripts.ajax-actions')
 
     <script>
         var crudSelector = '{{$crud->selector}}',
             afterDatatablesCallbacks = [];
     </script>
 
+    @include('global.inc.table.scripts.ajax-setup')
     @include('global.inc.table.scripts.confirm-action')
+    @include('global.inc.table.scripts.ajax-actions')
     @include('global.inc.table.scripts.initialize-datatables')
     @include('global.inc.table.scripts.search-filters')
     @include('global.inc.table.scripts.inline-edit')

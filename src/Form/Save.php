@@ -81,6 +81,7 @@ class Save
 				}
 			}
 		}
+		$row->save();
 
 		return $row;
 	}
