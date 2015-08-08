@@ -8,10 +8,12 @@
             var button = $('[crud-action=save]');
             button.addClass('loading');
 
-
             $.ajax({
                 url: '{!!$crud->router["validate"]->url()!!}',
-                data: $(this).serialize(),
+                type: 'POST',
+                data: new FormData( this ),
+                processData: false,
+                contentType: false,
                 success: function(response) {
                     if(response.fails) {
                         displayFormErrors(response);
@@ -26,6 +28,16 @@
             });
 
             return false;
+        });
+
+        $(document).ajaxError(function(e, xhr, ajaxSettings) {
+            if (/crudAttachmentsUpload/.test(ajaxSettings.url)) {
+                if (xhr.status == 422) {
+                    displayFormErrors({messages: xhr.responseJSON});
+                } else {
+                    clearValidationErrors();
+                }
+            }
         });
     </script>
 

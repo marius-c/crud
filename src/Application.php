@@ -48,7 +48,7 @@ class Application extends Container
 	 *
 	 * @var array
 	 */
-	protected $baseProviders = [
+	public $baseProviders = [
 		FilesystemServiceProvider::class,
 		EventServiceProvider::class,
 		ViewServiceProvider::class,
@@ -77,6 +77,11 @@ class Application extends Container
 	{
 		$this->registerConfig();
 		$this->registerBaseProviders();
+	}
+
+	public function removeProvider($provider)
+	{
+		$this->baseProviders = array_diff($this->baseProviders, [$provider]);
 	}
 
 	/**

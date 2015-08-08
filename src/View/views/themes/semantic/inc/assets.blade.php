@@ -10,8 +10,8 @@
 
 <!-- FileSlots package  -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-<script src="https://rawgit.com/IonutBajescu/fileslots.js/master/dist/slots.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://rawgit.com/IonutBajescu/fileslots.js/master/dist/slots.min.css" />
+<script src="https://cdn.rawgit.com/IonutBajescu/fileslots.js/master/dist/slots.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/IonutBajescu/fileslots.js/master/dist/slots.min.css" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.12/angular.min.js"></script>
 <script src="//cdn.jsdelivr.net/angular.initial-value/latest/angular-initial-value.min.js"></script>

@@ -2,14 +2,18 @@
 
 @section('callback')
     <script>
-        function displayFormErrors(response) {
+        function clearValidationErrors()
+        {
             $('.error-message').remove();
             $('.crud-error').each(function() {
                 $(this).removeClass('error crud-error');
             });
+        }
+
+        function displayFormErrors(response) {
+            clearValidationErrors();
 
             for(column in response.messages) {
-                console.log('[name='+column+'], [name="'+column+'[]"]', $('[name='+column+'], [name="'+column+'[]"]'));
                 var field = $('[name='+column+'], [name="'+column+'[]"]').closest('.field');
                 field.addClass('error crud-error');
 

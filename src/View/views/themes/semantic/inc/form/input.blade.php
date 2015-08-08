@@ -37,7 +37,7 @@
 
     <script type="text/jsx">
         React.render(
-            <FilesSlots files="{{$crud->form->row ? $crud->form->row->attachmentsByColumn($column->name)->toJson() : '[]'}}" empty_slots="{{$column->file_empty_slots}}" name="{{$column->name}}" target="{{$crud->config['attachments.upload.url']}}?_token={{csrf_token()}}"/>,
+            <FilesSlots files="{{$crud->form->row ? $crud->form->row->attachmentsByColumn($column->name)->toJson() : '[]'}}" empty_slots="{{$column->file_empty_slots}}" name="{{$column->name}}" target="{{$crud->config['attachments.upload.url']}}?crudAttachmentsUpload&scope={{get_class($crud->model)}}::{{$column->name}}&_token={{csrf_token()}}"/>,
             document.getElementById('filesContainer{{$column->name}}')
         );
     </script>
