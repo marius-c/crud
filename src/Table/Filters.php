@@ -7,93 +7,96 @@ use Ionut\Crud\Application;
 use Ionut\Crud\Modules\LaravelCompatibility\Pipeline;
 use Ionut\Crud\Utils\ArrayProxy;
 
-class Filters extends ArrayProxy {
+class Filters extends ArrayProxy
+{
 
-	/**
-	 * @var Collection
-	 */
-	protected $collection;
+    /**
+     * @var Collection
+     */
+    protected $collection;
 
-	/**
-	 * @var Request
-	 */
-	protected $request;
+    /**
+     * @var Request
+     */
+    protected $request;
 
-	public function __construct($items, Request $request)
-	{
-		$items = $this->prepareItems($items);
-		$this->collection = new FiltersCollection($items);
+    public function __construct($items, Request $request)
+    {
+        $items = $this->prepareItems($items);
+        $this->collection = new FiltersCollection($items);
 
-		$this->request = $request;
-	}
+        $this->request = $request;
+    }
 
-	public function query()
-	{
-		$queryFilters = [];
-		foreach($this->active() as $filter) {
-			$queryFilters[] = $filter->name;
-		}
-		return [
-			'filters' => $queryFilters
-		];
-	}
+    public function query()
+    {
+        $queryFilters = [];
+        foreach ($this->active() as $filter) {
+            $queryFilters[] = $filter->name;
+        }
 
-	public function toggle(Filter $filter)
-	{
-		$queryFilters = $this->query();
-		foreach($queryFilters['filters'] as $k => $queryFilter) {
-			if($queryFilter == $filter->name) {
-				unset($queryFilters['filters'][$k]);
-				return $queryFilters;
-			}
-		}
-		$queryFilters['filters'][] = $filter->name;
+        return [
+            'filters' => $queryFilters
+        ];
+    }
 
-		return $queryFilters;
-	}
+    public function toggle(Filter $filter)
+    {
+        $queryFilters = $this->query();
+        foreach ($queryFilters['filters'] as $k => $queryFilter) {
+            if ($queryFilter == $filter->name) {
+                unset($queryFilters['filters'][$k]);
 
-	public function send($query)
-	{
-		$pipes  = $this->preparePipes($this->active()->queryable()->toArray());
-		$pipeline = new Pipeline(Application::app());
-		$pipeline->send($query)
-				 ->via('apply')
-				 ->through($pipes)
-				 ->then(function($result) use($query){
-					$query = $result;
-				 });
+                return $queryFilters;
+            }
+        }
+        $queryFilters['filters'][] = $filter->name;
 
-		return $query;
-	}
+        return $queryFilters;
+    }
 
-	public function preparePipes($pipes)
-	{
-		return array_map(function($pipe){
-			return $pipe->getPipeCallback();
-		}, $pipes);
-	}
+    public function send($query)
+    {
+        $pipes = $this->preparePipes($this->active()->queryable()->toArray());
+        $pipeline = new Pipeline(Application::app());
+        $pipeline->send($query)
+            ->via('apply')
+            ->through($pipes)
+            ->then(function ($result) use ($query) {
+                $query = $result;
+            });
 
-	/**
-	 * @throws \Exception
-	 * @return ArrayAccess
-	 */
-	protected function getProxifiedArray()
-	{
-		return $this->collection;
-	}
+        return $query;
+    }
 
-	/**
-	 * @param $items
-	 * @return Filter
-	 */
-	private function prepareItems($items)
-	{
-		foreach ($items as $name => &$item) {
-			if ( ! $item instanceof Filter) {
-				$item = new Filter($name, $item);
-			}
-		}
+    public function preparePipes($pipes)
+    {
+        return array_map(function ($pipe) {
+            return $pipe->getPipeCallback();
+        }, $pipes);
+    }
 
-		return $items;
-	}
+    /**
+     * @throws \Exception
+     * @return ArrayAccess
+     */
+    protected function getProxifiedArray()
+    {
+        return $this->collection;
+    }
+
+    /**
+     * @param $items
+     * @return Filter
+     */
+    private function prepareItems($items)
+    {
+        foreach ($items as $name => &$item) {
+            if (!$item instanceof Filter) {
+                $item = new Filter($name, $item);
+            }
+        }
+
+        return $items;
+    }
 }

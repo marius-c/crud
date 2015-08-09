@@ -2,14 +2,16 @@
 
 use Ionut\Crud\Table\Column;
 
-abstract class AbstractColumnView {
+abstract class AbstractColumnView
+{
 
     /**
      * @var Column
      */
     protected $column;
 
-    public function ___construct(Column $column) {
+    public function ___construct(Column $column)
+    {
         $this->column = $column;
     }
 

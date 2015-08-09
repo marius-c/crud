@@ -1,11 +1,10 @@
-
 <style>
     .advanced-search-container .search-padded {
         padding: 15px 10px 10px;
     }
 
     .advanced-search-container .submit-search {
-        float:right;
+        float: right;
         margin-top: 10px;
     }
 </style>
@@ -26,7 +25,7 @@
             @endif
         @endforeach
 
-        <button advanced-seach-submitter class="ui blue button submit-search" >Search</button>
+        <button advanced-seach-submitter class="ui blue button submit-search">Search</button>
         <div class="clearfix"></div>
     </form>
 </div>
@@ -34,34 +33,33 @@
 
 @section('js')
     <script>
-        (function() {
+        (function () {
             var container = $('.advanced-search-container'),
-                filtersAreActive = false,
-                launcher = $('[advanced-search-launcher]'),
-                submitter = $('[advanced-seach-submitter]');
+                    filtersAreActive = false,
+                    launcher = $('[advanced-search-launcher]'),
+                    submitter = $('[advanced-seach-submitter]');
 
-            container.find('input').change(function(){
+            container.find('input').change(function () {
                 filtersAreActive = true;
             });
 
 
-            function submitAdvancedSearch()
-            {
+            function submitAdvancedSearch() {
                 var table = $('{{$crud->selector}}').dataTable();
                 table._fnReDraw();
             }
 
-            function toggleAdvancedSearch()
-            {
-                if(container.is(':visible')) {
+            function toggleAdvancedSearch() {
+                if (container.is(':visible')) {
                     submitAdvancedSearch();
                 }
                 container.slideToggle(300);
 
-                if(filtersAreActive) {
+                if (filtersAreActive) {
                     launcher.addClass('green active');
                 }
             }
+
             launcher.click(toggleAdvancedSearch);
             submitter.click(toggleAdvancedSearch);
         })();

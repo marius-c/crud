@@ -1,16 +1,16 @@
 <?php namespace Ionut\Crud\Plugins\Extractor;
 
-use Ionut\Crud\Crud;
 use Ionut\Crud\Plugins\PluginContract;
 
-class ExtractorPlugin extends PluginContract {
+class ExtractorPlugin extends PluginContract
+{
 
-	protected $active = 1;
+    protected $active = 1;
 
-	protected $name = 'extractor';
+    protected $name = 'extractor';
 
-	public function boot()
-	{
+    public function boot()
+    {
 
-	}
+    }
 }

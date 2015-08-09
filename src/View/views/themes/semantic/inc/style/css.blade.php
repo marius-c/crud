@@ -6,6 +6,7 @@
     body {
         background: 0 !important;
     }
+
     .crud th {
         cursor: pointer !important;
     }
@@ -19,8 +20,8 @@
     }
 
     .expandable.expandable {
-        display:block;
-        text-align:center !important;
+        display: block;
+        text-align: center !important;
         padding: .5em 1.7em !important;
     }
 
@@ -48,7 +49,6 @@
         cursor: pointer;
     }
 
-
     .chosen-container {
         width: 100% !important;
         background: white !important;
@@ -57,7 +57,7 @@
     .chosen-single.chosen-single.chosen-single, .chosen-choices.chosen-choices.chosen-choices {
         padding: .65em 1em;
         height: auto;
-        border-color: rgba(0,0,0,.15);
+        border-color: rgba(0, 0, 0, .15);
         background: none !important;
         border-radius: .3125em !important;
         box-shadow: none;
@@ -75,7 +75,7 @@
         box-shadow: .3em 0 0 0 #D95C5C inset;
     }
 
-    .chosen-container-single .chosen-single, .chosen-choices-single .chosen-choices{
+    .chosen-container-single .chosen-single, .chosen-choices-single .chosen-choices {
         line-height: calc(2.7em - 1.65em + .3em) !important;
     }
 
@@ -91,7 +91,6 @@
         width: 100% !important;
         height: 50px !important;
     }
-
 
     .table tr td:last-child {
         white-space: nowrap;

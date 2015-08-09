@@ -5,34 +5,32 @@ use Ionut\Crud\Crud;
 class Style
 {
 
-	/**
-	 * @var Crud
-	 */
-	private $crud;
+    /**
+     * @var array
+     */
+    protected $style;
+    protected $default = [
+        'before' => null,
+        'after'  => null,
+    ];
+    /**
+     * @var Crud
+     */
+    private $crud;
 
-	/**
-	 * @var array
-	 */
-	protected $style;
+    public function __construct(Crud $crud)
+    {
+        $this->crud = $crud;
+        $this->style = $crud->options['table.style'] + $this->default;
+    }
 
-	protected $default = [
-		'before' => null,
-		'after'  => null,
-	];
+    public function getBefore()
+    {
+        return $this->crud->value($this->style['before']);
+    }
 
-	public function __construct(Crud $crud)
-	{
-		$this->crud = $crud;
-		$this->style = $crud->options['table.style'] + $this->default;
-	}
-
-	public function getBefore()
-	{
-		return $this->crud->value($this->style['before']);
-	}
-
-	public function getAfter()
-	{
-		return $this->crud->value($this->style['after']);
-	}
+    public function getAfter()
+    {
+        return $this->crud->value($this->style['after']);
+    }
 }

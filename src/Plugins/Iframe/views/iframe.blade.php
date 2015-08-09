@@ -1,4 +1,3 @@
-
 @if($crud->options['iframe_preload'])
     <?php
     // Notice the other views that we're going to have the $url request response preloaded
@@ -6,9 +5,11 @@
     // attribute and that's going to help the cross-browser compatibility.
     $GLOBALS['preloaded_by_iframe'] = true;
     ?>
-    <iframe allowtransparency="yes" srcdoc="{{$crud->router->preload($url)}}" src="about:blank" frameborder="0" style="width:100%; display: block;" id="crud-iframe-{{$crud->id}}" scrolling="no"></iframe>
+    <iframe allowtransparency="yes" srcdoc="{{$crud->router->preload($url)}}" src="about:blank" frameborder="0"
+            style="width:100%; display: block;" id="crud-iframe-{{$crud->id}}" scrolling="no"></iframe>
 @else
-    <iframe allowtransparency="yes" src="{{$url}}" frameborder="0" style="width:100%; display: block;" id="crud-iframe-{{$crud->id}}" scrolling="no"></iframe>
+    <iframe allowtransparency="yes" src="{{$url}}" frameborder="0" style="width:100%; display: block;"
+            id="crud-iframe-{{$crud->id}}" scrolling="no"></iframe>
 @endif
 
 
@@ -18,7 +19,6 @@
             $ = jQuery;
         }
         this.iframe = $(selector);
-        console.log('start', this.iframe.attr('id'));
 
         this.hash = {
             getLocation: function () {
@@ -39,8 +39,8 @@
                 izolator.changeLocation(izolator.hash.getLocation());
             };
 
-            this.iframe.load(function() {
-                setInterval(function() {
+            this.iframe.load(function () {
+                setInterval(function () {
                     izolator.resizeIframe();
                 }, 100);
             });
@@ -87,14 +87,14 @@
     }
 
 
-    var callback_{{$crud->id}} = function() {
+    var callback_{{$crud->id}}  = function () {
         var izolator = new IsolatedIframe('#crud-iframe-{{$crud->id}}');
         izolator.run();
     };
-    if(typeof jQuery == 'undefined') {
+    if (typeof jQuery == 'undefined') {
         var jq = document.createElement('script');
         jq.src = "https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js";
-        jq.onload = function() {
+        jq.onload = function () {
             callback_{{$crud->id}}();
         };
         document.getElementsByTagName('head')[0].appendChild(jq);

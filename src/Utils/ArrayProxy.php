@@ -3,18 +3,19 @@
 
 use ArrayAccess;
 
-abstract class ArrayProxy implements ArrayAccess, \IteratorAggregate {
+abstract class ArrayProxy implements ArrayAccess, \IteratorAggregate
+{
+
+	public function getIterator()
+	{
+		return $this->getProxifiedArray();
+	}
 
 	/**
 	 * @throws \Exception
 	 * @return ArrayAccess
 	 */
 	abstract protected function getProxifiedArray();
-
-	public function getIterator()
-	{
-		return $this->getProxifiedArray();
-	}
 
 	/**
 	 * (PHP 5 &gt;= 5.0.0)<br/>
@@ -64,7 +65,7 @@ abstract class ArrayProxy implements ArrayAccess, \IteratorAggregate {
 	 */
 	public function offsetSet($offset, $value)
 	{
-		if($value === false) {
+		if ($value === false) {
 			return $this->offsetUnset($offset);
 		}
 
@@ -86,7 +87,7 @@ abstract class ArrayProxy implements ArrayAccess, \IteratorAggregate {
 		$this->getProxifiedArray()->offsetUnset($offset);
 	}
 
-	public function __call($k, $args = array())
+	public function __call($k, $args = [])
 	{
 		return call_user_func_array([$this->getProxifiedArray(), $k], $args);
 	}

@@ -1,9 +1,9 @@
 <?php namespace Ionut\Crud\Modules\Extractor;
 
 use Ionut\Crud\Application;
-use Ionut\Crud\Crud;
 
-class DbConfigExtractor {
+class DbConfigExtractor
+{
 
 	public $notRecomendedForCrudColumns = ['updated_at', 'deleted_at'];
 
@@ -19,26 +19,20 @@ class DbConfigExtractor {
 
 	public function routes()
 	{
-		if($this->app->request->has('generate')){
+		if ($this->app->request->has('generate')) {
 			$result = $this->generate();
 
 			return $result;
-		} else{
+		} else {
 			return $this->form();
 		}
-	}
-
-	public function form()
-	{
-		$connections = array_keys($this->app->config['database.connections']);
-		return $this->app->presenter->view('modules.extractor.form')->with('connections', $connections);
 	}
 
 	public function generate()
 	{
 
-		$table         = $this->app->request->get('table');
-		$conn 		   = $this->app->request->get('connection');
+		$table = $this->app->request->get('table');
+		$conn = $this->app->request->get('connection');
 		$columnsConfig = $this->getColumnsConfig($conn, $table);
 		$columnsString = str_replace('array (', 'array(', var_export($columnsConfig, true));
 
@@ -62,9 +56,9 @@ CRUD;
 CRUD;
 		$columns = $connection->select($sql);
 
-		$config = array();
-		foreach($columns as $column){
-			if(in_array($column['column_name'], $this->notRecomendedForCrudColumns)){
+		$config = [];
+		foreach ($columns as $column) {
+			if (in_array($column['column_name'], $this->notRecomendedForCrudColumns)) {
 				continue;
 			}
 			$config[$column['column_name']] = $this->getColumnConfig($column);
@@ -76,9 +70,9 @@ CRUD;
 	public function getColumnConfig($column)
 	{
 		$config = [];
-		foreach(['input', 'table', 'inline', 'form'] as $k => $v){
+		foreach (['input', 'table', 'inline', 'form'] as $k => $v) {
 			$config[$v] = $this->getColumnConfigOption($v, $column);
-			if($config[$v] === true) {
+			if ($config[$v] === true) {
 				unset($config[$v]);
 			}
 		}
@@ -94,44 +88,54 @@ CRUD;
 
 			case 'table':
 
-				if(in_array($column['column_name'], ['password', 'remember_token'])){
+				if (in_array($column['column_name'], ['password', 'remember_token'])) {
 					return false;
 				}
 
 				return true;
 
 			case 'form':
-				if(in_array($column['column_name'], ['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token'])){
+				if (in_array($column['column_name'],
+					['id', 'created_at', 'updated_at', 'deleted_at', 'remember_token'])) {
 					return false;
 				}
+
 				return true;
 
 			case 'inline':
-				if(in_array($column['column_name'], ['id'])){
+				if (in_array($column['column_name'], ['id'])) {
 					return false;
 				}
+
 				return true;
 		}
 	}
 
 	public function getColumnInputType($column)
 	{
-		if($column['column_name'] == 'id'){
+		if ($column['column_name'] == 'id') {
 			return 'text';
 		}
 
-		if($column['data_type'] == 'string'){
+		if ($column['data_type'] == 'string') {
 			return 'textarea';
 		}
 
-		if($column['data_type'] == 'datetime'){
+		if ($column['data_type'] == 'datetime') {
 			return 'date';
 		}
 
-		if($column['data_type'] == 'tinyint'){
+		if ($column['data_type'] == 'tinyint') {
 			return 'checkbox';
 		}
 
 		return 'text';
+	}
+
+	public function form()
+	{
+		$connections = array_keys($this->app->config['database.connections']);
+
+		return $this->app->presenter->view('modules.extractor.form')->with('connections', $connections);
 	}
 }

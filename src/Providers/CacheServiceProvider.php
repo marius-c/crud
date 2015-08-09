@@ -4,35 +4,36 @@ use Doctrine\Common\Cache\PredisCache;
 use Illuminate\Support\ServiceProvider;
 use Predis\Client;
 
-class CacheServiceProvider extends ServiceProvider {
+class CacheServiceProvider extends ServiceProvider
+{
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-		$this->registerRedis();
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerRedis();
 
-		$this->registerCache();
-	}
+        $this->registerCache();
+    }
 
-	private function registerRedis()
-	{
-		$this->app->singleton('redis', function () {
-			$manager = new Client();
+    private function registerRedis()
+    {
+        $this->app->singleton('redis', function () {
+            $manager = new Client();
 
-			return $manager;
-		});
-	}
+            return $manager;
+        });
+    }
 
-	private function registerCache()
-	{
-		$this->app->singleton('cache', function () {
-			$manager = new PredisCache($this->app->redis);
+    private function registerCache()
+    {
+        $this->app->singleton('cache', function () {
+            $manager = new PredisCache($this->app->redis);
 
-			return $manager;
-		});
-	}
+            return $manager;
+        });
+    }
 }

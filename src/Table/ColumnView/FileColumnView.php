@@ -1,13 +1,12 @@
 <?php namespace Ionut\Crud\Table\ColumnView;
 
-use Ionut\Crud\Table\Column;
-
-class FileColumnView extends AbstractColumnView {
+class FileColumnView extends AbstractColumnView
+{
 
     public function format($value)
     {
         $file = json_decode($value);
-        if(!$file) {
+        if (!$file) {
             return;
         }
 

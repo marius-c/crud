@@ -8,10 +8,16 @@
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
+<!-- PNotify -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pnotify/2.0.0/pnotify.all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pnotify/2.0.0/pnotify.all.min.js"></script>
+<script>var notice = parent.PNotify;</script>
+
 <!-- FileSlots package  -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
 <script src="https://cdn.rawgit.com/IonutBajescu/fileslots.js/master/dist/slots.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/IonutBajescu/fileslots.js/master/dist/slots.min.css" />
+<link rel="stylesheet" type="text/css"
+      href="https://cdn.rawgit.com/IonutBajescu/fileslots.js/master/dist/slots.min.css"/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.12/angular.min.js"></script>
 <script src="//cdn.jsdelivr.net/angular.initial-value/latest/angular-initial-value.min.js"></script>

@@ -6,11 +6,11 @@ use Ionut\Crud\Database\Traits\PropsKeeper;
 
 class Model extends BaseModel
 {
-	use Casts;
-	use PropsKeeper;
+    use Casts;
+    use PropsKeeper;
 
-	protected $guarded = [];
+    protected $guarded = [];
 
-	protected $casts = [];
+    protected $casts = [];
 
 }

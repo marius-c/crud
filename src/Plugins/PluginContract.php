@@ -3,80 +3,86 @@
 use Ionut\Crud\Crud;
 use ReflectionClass;
 
-abstract class PluginContract {
+abstract class PluginContract
+{
 
-	protected $active = 1;
+    protected $active = 1;
 
-	/**
-	 * @var
-	 */
-	protected $crud = 'default';
+    /**
+     * @var
+     */
+    protected $crud = 'default';
 
-	protected $booted = false;
+    protected $booted = false;
 
-	public function __construct(Crud $crud)
-	{
-		$this->crud = $crud;
-	}
+    public function __construct(Crud $crud)
+    {
+        $this->crud = $crud;
+    }
 
-	abstract public function boot();
+    abstract public function boot();
 
-	public function bootSingleTime()
-	{
-		if( ! $this->booted) {
-			$this->boot();
-			$this->booted = true;
-		}
-	}
+    public function bootSingleTime()
+    {
+        if (!$this->booted) {
+            $this->boot();
+            $this->booted = true;
+        }
+    }
 
-	public function register()
-	{
-		$this->registerViews();
-	}
+    public function register()
+    {
+        $this->registerViews();
+    }
 
-	public function registerViews()
-	{
-		$path = $this->getViewsPath();
-		$this->crud->app->view->addNamespace('plugins/iframe', $path);
-	}
+    public function registerViews()
+    {
+        $path = $this->getViewsPath();
+        $this->crud->app->view->addNamespace('plugins/iframe', $path);
+    }
 
-	public function setInactive()
-	{
-		$this->active = 0;
-		return $this;
-	}
+    public function setInactive()
+    {
+        $this->active = 0;
 
-	public function disable()
-	{
-		return $this->setInactive();
-	}
+        return $this;
+    }
 
-	public function setActive()
-	{
-		$this->active = 1;
-		return $this;
-	}
+    public function disable()
+    {
+        return $this->setInactive();
+    }
 
-	public function isActive()
-	{
-		return (bool)$this->active;
-	}
+    public function setActive()
+    {
+        $this->active = 1;
 
-	public function getName()
-	{
-		if(!isset($this->name)) {
-			throw new \Exception('Did you forget the name property for '.get_class($this).'?');
-		}
-		return $this->name;
-	}
+        return $this;
+    }
 
-	public function getViewsPath()
-	{
-		return $this->getDir().'/views';
-	}
+    public function isActive()
+    {
+        return (bool)$this->active;
+    }
 
-	protected function getDir() {
-		$reflector = new ReflectionClass(get_class($this));
-		return dirname($reflector->getFileName());
-	}
+    public function getName()
+    {
+        if (!isset($this->name)) {
+            throw new \Exception('Did you forget the name property for '.get_class($this).'?');
+        }
+
+        return $this->name;
+    }
+
+    public function getViewsPath()
+    {
+        return $this->getDir().'/views';
+    }
+
+    protected function getDir()
+    {
+        $reflector = new ReflectionClass(get_class($this));
+
+        return dirname($reflector->getFileName());
+    }
 }

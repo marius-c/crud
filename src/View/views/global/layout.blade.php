@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,9 +9,9 @@
 </head>
 <body>
 {!!$presenter->snippets['header']!!}
-    @yield('body')
+@yield('body')
 
-    @include('global.inc.angular.initialize')
+@include('global.inc.angular.initialize')
 {!!$presenter->snippets['footer']!!}
 </body>
 </html>

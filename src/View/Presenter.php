@@ -6,29 +6,32 @@ use Ionut\Crud\Package;
 
 class Presenter
 {
-	public $snippets = [
-		'footer' => '',
-		'header' => '',
-	];
+    public $snippets = [
+        'footer' => '',
+        'header' => '',
+    ];
 
 
-	public function view($name, $vars = [], $string = true)
-	{
-		$name = 'themes.'.Application::app('config')->get('style.theme').'.'.$name;
-		return $this->raw($name, $vars, $string);
-	}
+    public function view($name, $vars = [], $string = true)
+    {
+        $name = 'themes.'.Application::app('config')->get('style.theme').'.'.$name;
 
-	public function raw($name, $vars = [], $string = true)
-	{
-		$vars['presenter'] = $this;
-		$view = Application::app('view')->make($name, $vars);
-		if($string) $view = $view->render();
+        return $this->raw($name, $vars, $string);
+    }
 
-		return $view;
-	}
+    public function raw($name, $vars = [], $string = true)
+    {
+        $vars['presenter'] = $this;
+        $view = Application::app('view')->make($name, $vars);
+        if ($string) {
+            $view = $view->render();
+        }
 
-	public function iframeParentRedirect($url)
-	{
-		return new Response((string)$this->view('iframe-parent-redirect', compact('url')));
-	}
+        return $view;
+    }
+
+    public function iframeParentRedirect($url)
+    {
+        return new Response((string)$this->view('iframe-parent-redirect', compact('url')));
+    }
 } 

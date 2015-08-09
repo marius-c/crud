@@ -18,7 +18,7 @@ class Events extends Dispatcher
 		parent::__construct($this->crud->app);
 	}
 
-	public function fire($event, $payload = array(), $halt = true)
+	public function fire($event, $payload = [], $halt = true)
 	{
 		$payload = $this->preparePayload($payload);
 

@@ -2,7 +2,8 @@
 
 use ArrayAccess;
 
-class Config implements ArrayAccess {
+class Config implements ArrayAccess
+{
 
 	/**
 	 * All of the configuration items.
@@ -14,63 +15,18 @@ class Config implements ArrayAccess {
 	/**
 	 * Create a new configuration repository.
 	 *
-	 * @param  array  $items
+	 * @param  array $items
 	 * @return void
 	 */
-	public function __construct(array $items = array())
+	public function __construct(array $items = [])
 	{
 		$this->items = $items;
 	}
 
 	/**
-	 * Determine if the given configuration value exists.
-	 *
-	 * @param  string  $key
-	 * @return bool
-	 */
-	public function has($key)
-	{
-		return array_has($this->items, $key);
-	}
-
-	/**
-	 * Get the specified configuration value.
-	 *
-	 * @param  string  $key
-	 * @param  mixed   $default
-	 * @return mixed
-	 */
-	public function get($key, $default = null)
-	{
-		return array_get($this->items, $key, $default);
-	}
-
-	/**
-	 * Set a given configuration value.
-	 *
-	 * @param  array|string  $key
-	 * @param  mixed   $value
-	 * @return void
-	 */
-	public function set($key, $value = null)
-	{
-		if (is_array($key))
-		{
-			foreach ($key as $innerKey => $innerValue)
-			{
-				array_set($this->items, $innerKey, $innerValue);
-			}
-		}
-		else
-		{
-			array_set($this->items, $key, $value);
-		}
-	}
-
-	/**
 	 * Prepend a value onto an array configuration value.
 	 *
-	 * @param  string  $key
+	 * @param  string $key
 	 * @param  mixed  $value
 	 * @return void
 	 */
@@ -84,9 +40,39 @@ class Config implements ArrayAccess {
 	}
 
 	/**
+	 * Get the specified configuration value.
+	 *
+	 * @param  string $key
+	 * @param  mixed  $default
+	 * @return mixed
+	 */
+	public function get($key, $default = null)
+	{
+		return array_get($this->items, $key, $default);
+	}
+
+	/**
+	 * Set a given configuration value.
+	 *
+	 * @param  array|string $key
+	 * @param  mixed        $value
+	 * @return void
+	 */
+	public function set($key, $value = null)
+	{
+		if (is_array($key)) {
+			foreach ($key as $innerKey => $innerValue) {
+				array_set($this->items, $innerKey, $innerValue);
+			}
+		} else {
+			array_set($this->items, $key, $value);
+		}
+	}
+
+	/**
 	 * Push a value onto an array configuration value.
 	 *
-	 * @param  string  $key
+	 * @param  string $key
 	 * @param  mixed  $value
 	 * @return void
 	 */
@@ -112,7 +98,7 @@ class Config implements ArrayAccess {
 	/**
 	 * Determine if the given configuration option exists.
 	 *
-	 * @param  string  $key
+	 * @param  string $key
 	 * @return bool
 	 */
 	public function offsetExists($key)
@@ -121,9 +107,20 @@ class Config implements ArrayAccess {
 	}
 
 	/**
+	 * Determine if the given configuration value exists.
+	 *
+	 * @param  string $key
+	 * @return bool
+	 */
+	public function has($key)
+	{
+		return array_has($this->items, $key);
+	}
+
+	/**
 	 * Get a configuration option.
 	 *
-	 * @param  string  $key
+	 * @param  string $key
 	 * @return mixed
 	 */
 	public function offsetGet($key)
@@ -134,7 +131,7 @@ class Config implements ArrayAccess {
 	/**
 	 * Set a configuration option.
 	 *
-	 * @param  string  $key
+	 * @param  string $key
 	 * @param  mixed  $value
 	 * @return void
 	 */
@@ -146,7 +143,7 @@ class Config implements ArrayAccess {
 	/**
 	 * Unset a configuration option.
 	 *
-	 * @param  string  $key
+	 * @param  string $key
 	 * @return void
 	 */
 	public function offsetUnset($key)

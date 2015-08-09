@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Collection;
 
-class RoutesCollection extends Collection {
+class RoutesCollection extends Collection
+{
 
 }

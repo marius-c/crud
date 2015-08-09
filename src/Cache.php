@@ -3,53 +3,57 @@
 
 use Doctrine\Common\Cache\Cache as DoctrineCache;
 
-class Cache {
+class Cache
+{
 
-	protected $crud;
+    protected $crud;
 
-	/**
-	 * @var DoctrineCache
-	 */
-	protected $repo;
+    /**
+     * @var DoctrineCache
+     */
+    protected $repo;
 
-	public function __construct(Crud $crud)
-	{
-		$this->crud = $crud;
-		$this->repo = $crud->cache;
-	}
+    public function __construct(Crud $crud)
+    {
+        $this->crud = $crud;
+        $this->repo = $crud->cache;
+    }
 
-	public function start($key, $expireMinutes = 10)
-	{
-		if($this->crud->options['dev']) {
-			return true;
-		}
+    public function start($key, $expireMinutes = 10)
+    {
+        if ($this->crud->options['dev']) {
+            return true;
+        }
 
-		$key = $this->formatKey($key);
-		if($this->repo->contains($key)) {
-			echo $this->repo->fetch($key);
-			return false;
-		}
+        $key = $this->formatKey($key);
+        if ($this->repo->contains($key)) {
+            echo $this->repo->fetch($key);
 
-		$expire = $expireMinutes*60;
-		ob_start($this->saveKey($key, $expire));
-		return true;
-	}
+            return false;
+        }
 
-	public function saveKey($key, $expire)
-	{
-		return function($contents) use($key, $expire) {
-			$this->repo->save($key, $contents, $expire);
-			return $contents;
-		};
-	}
+        $expire = $expireMinutes * 60;
+        ob_start($this->saveKey($key, $expire));
 
-	public function stop()
-	{
-		ob_end_flush();
-	}
+        return true;
+    }
 
-	private function formatKey($key)
-	{
-		return $this->crud->id.'.'.$key;
-	}
+    private function formatKey($key)
+    {
+        return $this->crud->id.'.'.$key;
+    }
+
+    public function saveKey($key, $expire)
+    {
+        return function ($contents) use ($key, $expire) {
+            $this->repo->save($key, $contents, $expire);
+
+            return $contents;
+        };
+    }
+
+    public function stop()
+    {
+        ob_end_flush();
+    }
 }

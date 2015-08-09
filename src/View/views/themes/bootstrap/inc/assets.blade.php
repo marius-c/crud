@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
@@ -22,14 +21,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.3/jquery.tagsinput.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-tagsinput/1.3.3/jquery.tagsinput.css"/>
-
-
-
-
-
-
-
-
 
 
 <link href="/assets/global/css/components-rounded.css" id="style_components" rel="stylesheet" type="text/css">

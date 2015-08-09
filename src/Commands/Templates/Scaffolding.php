@@ -2,20 +2,22 @@
 
 use Ionut\Crud\Crud;
 
-class CLASS_NAME extends Scaffolding {
+class CLASS_NAME extends Scaffolding
+{
 
-	/**
-	 * @return Crud
-	 */
-	public function getBase(){
+    /**
+     * @return Crud
+     */
+    public function getBase()
+    {
 
-		return crud()
-			->table('TABLE_NAME')
-			->columns([
+        return crud()
+            ->table('TABLE_NAME')
+            ->columns([
 
-			])
-			->options([
+            ])
+            ->options([
 
-			]);
-	}
+            ]);
+    }
 }
