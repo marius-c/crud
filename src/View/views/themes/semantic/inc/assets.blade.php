@@ -3,7 +3,7 @@
 <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 
 <!-- ReactJS and JSX -->
-<script src="https://fb.me/react-0.13.3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.2/JSXTransformer.js"></script>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
