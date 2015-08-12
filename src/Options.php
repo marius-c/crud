@@ -9,92 +9,92 @@ class Options implements ArrayAccess
     /**
      * @var array
      */
-    protected $query_walkers = [];
+    public $query_walkers = [];
 
     /**
      * @var bool
      */
-    protected $row_actions_enabled = true;
+    public $row_actions_enabled = true;
 
     /**
      * @var bool
      */
-    protected $global_actions_enabled = true;
+    public $global_actions_enabled = true;
 
     /**
      * @var bool
      */
-    protected $search_filters_enabled = false;
+    public $search_filters_enabled = false;
 
     /**
      * @var bool
      */
-    protected $advanced_search_enabled = true;
+    public $advanced_search_enabled = true;
 
     /**
      * @var array
      */
-    protected $form_style = [];
+    public $form_style = [];
 
     /**
      * @var array
      */
-    protected $table_style = [];
+    public $table_style = [];
 
     /**
      * @var array
      */
-    protected $rules = [];
+    public $rules = [];
 
     /**
      * @var array
      */
-    protected $events = [];
+    public $events = [];
 
     /**
      * @var array
      */
-    protected $with = [];
+    public $with = [];
 
     /**
      * Deprecated
      */
-    protected $editable = true;
+    public $editable = true;
 
     /**
      * @var array
      */
-    protected $filters = [];
+    public $filters = [];
 
     /**
      * @var int
      */
-    protected $default_order_column = 0;
+    public $default_order_column = 0;
 
     /**
      * @var string
      */
-    protected $default_order_type = 'desc';
+    public $default_order_type = 'desc';
 
     /**
      * @var bool
      */
-    protected $iframe_follower = true;
+    public $iframe_follower = true;
 
     /**
      * @var null
      */
-    protected $title = null;
+    public $title = null;
 
     /**
      * @var bool
      */
-    protected $dev = false;
+    public $dev = false;
 
     /**
      * @var bool
      */
-    protected $iframe_preload = false;
+    public $iframe_preload = false;
 
     public function __construct(Actions $actions)
     {

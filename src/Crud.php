@@ -112,7 +112,6 @@ class Crud
      */
     public $booted = false;
 
-
     /**
      * @var Options
      */
@@ -137,6 +136,8 @@ class Crud
         $this->plugins = new Plugins($this, $this->app['crud.manager']->getDefaultPlugins());
         $this->events = new Events($this);
         $this->messageBag = new MessageBag();
+        $this->columns = new Columns([], $this->overrideColumnDefaults);
+
         $this->messageBag->setPresenter($this->app['presenter']);
         $this->refreshDependencies();
         $this->register();
@@ -194,20 +195,19 @@ class Crud
     }
 
     /**
-     * @param array $columns
+     * @param  array $columns
      * @return self
      */
     public function columns($columns)
     {
-        foreach ($columns as $column) {
+        foreach ($columns as $k => $column) {
             if ($this->options['editable'] == false) {
                 $column['editable'] = false;
             }
+            $columns[$k] = new Column($k, $column, $this->overrideColumnDefaults);
         }
 
-        $this->columns = new Columns($columns, $this->overrideColumnDefaults);
-
-        foreach ($this->columns as $k => $column) {
+        foreach ($columns as $k => $column) {
             if ($column->expandable) {
                 $this->parseExpandableColumn($columns, $column);
             }
@@ -264,7 +264,6 @@ class Crud
             $this->options[$k] = $v;
         }
         $this->refreshDependencies(); // refresh the crud
-        $this->bindEvents();
 
         return $this;
     }
@@ -468,6 +467,8 @@ class Crud
 
     public function boot()
     {
+        $this->bindEvents();
+
         if (!$this->booted) {
             $this->events->fire('booting');
             $this->bootPlugins();
