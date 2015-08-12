@@ -11,9 +11,7 @@
             $.ajax({
                 url: '{!!$crud->router["validate"]->url()!!}',
                 type: 'POST',
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
+                data: $(this).serialize(),
                 success: function (response) {
                     if (response.fails) {
                         displayFormErrors(response);

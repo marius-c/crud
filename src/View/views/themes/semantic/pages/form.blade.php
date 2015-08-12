@@ -10,7 +10,7 @@
         {{$title}}
     </div>
 
-    <form method="post" class="ui form crud-form" action="{{$crud->actions['save']->url($row->id)}}">
+    <form enctype="multipart/form-data" method="post" class="ui form crud-form" action="{{$crud->actions['save']->url($row->id)}}">
 
         {!!$crud->form->style->getBefore('fields')!!}
         @foreach($crud->columns->whereProp('form') as $column)

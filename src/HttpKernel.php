@@ -3,6 +3,7 @@
 use Illuminate\Contracts\Routing\TerminableMiddleware;
 use Illuminate\Http\Exception\HttpResponseException;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Session\Middleware\StartSession;
 use Ionut\Crud\Modules\LaravelCompatibility\Pipeline;
@@ -62,8 +63,14 @@ class HttpKernel
      */
     private function prepareResponse($response)
     {
-        if (!method_exists($response, 'send')) {
-            $response = new Response($response);
+        if ( ! method_exists($response, 'send')) {
+            if (is_array($response)) {
+                $response = new JsonResponse($response);
+            }
+            else {
+                $response = new Response($response);
+            }
+
         }
 
         return $response;
