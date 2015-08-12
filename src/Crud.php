@@ -548,7 +548,10 @@ class Crud
         }
 
         foreach (explode('.', $key) as $segment) {
-            if (is_array($target)) {
+            if (is_object($target)) {
+                $target = @$target->{$segment};
+            }
+            elseif (is_array($target)) {
                 if (!array_key_exists($segment, $target)) {
                     return value($default);
                 }
@@ -556,8 +559,6 @@ class Crud
                 $target = $target[$segment];
             } elseif ($target instanceof ArrayAccess) {
                 $target = @$target[$segment];
-            } elseif (is_object($target)) {
-                $target = @$target->{$segment};
             } else {
                 return value($default);
             }

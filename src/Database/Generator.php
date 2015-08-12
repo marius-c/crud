@@ -126,19 +126,19 @@ class Generator
     /**
      * Parse a nested relation and apply a Closure on it.
      *
-     * @param string   $relation
-     * @param Builder  $query
-     * @param \Closure $final
-     * @param int      $start
+     * @param  string    $relation
+     * @param  Builder   $query
+     * @param  callable  $final
+     * @param  int       $start
      */
-    public function parseNestedRelation($relation, $query, $final, $start = 0)
+    public function parseNestedRelation($relation, $query, callable $final, $start = 0)
     {
         $steps = explode('.', $relation);
         $step = $steps[$start];
 
         // We're going to split in chunks each relation step
         // and call the function recursively until we've touched
-        // the last relation step, then appling the $final function
+        // the last relation step, then we'll apply the $final callback
         if (count($steps) - 1 > $start) {
             $query->whereHas($step, function ($subquery) use ($relation, $query, $final, $start) {
                 $this->parseNestedRelation($relation, $subquery, $final, ++$start);
