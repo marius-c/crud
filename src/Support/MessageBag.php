@@ -17,6 +17,10 @@ class MessageBag extends \Illuminate\Support\MessageBag
 
     public function html($tag)
     {
+        if (!$this->has($tag)) {
+            return '';
+        }
+
         return collect($this->getMessages()[$tag])->map([$this, 'createNoticeJs'])->implode('');
     }
 
