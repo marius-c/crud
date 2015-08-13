@@ -105,6 +105,7 @@ class Generator
     public function applyColumnsSearchFilter($query)
     {
         foreach ($this->getColumnsSearch() as list($column, $s)) {
+
             $name = $column->name;
             if ($column->relationable()) {
                 $this->applyRelationableSearch($column, $query, $s);
@@ -194,7 +195,7 @@ class Generator
                 }
 
                 if ($column->search) {
-                    if ($s != '') {
+                    if ( ! empty($s)) {
                         yield $column->name => [$column, $s];
                     }
                 }

@@ -390,7 +390,7 @@ class Crud
         return $this->request->url().'?'.http_build_query($params + [
                 'crud'  => $this->id,
                 'route' => 'table'
-            ]);
+            ] + $this->request->all());
     }
 
     /**

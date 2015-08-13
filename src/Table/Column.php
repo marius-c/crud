@@ -70,7 +70,17 @@ class Column
          * Angular shortcuts
          */
         'ng-model'            => null,
-        'file_empty_slots'    => 1
+        'file_empty_slots'    => 1,
+
+        // Add the column before another column.
+        // @todo
+        'insert_before'       => null,
+        // Add the column after another column.
+        // @todo
+        'insert_after'        => null,
+
+        // Insert the column at the end
+        'insert_last'         => false
     ];
 
     public function __construct($name, array $options, array $overrideDefaults = [])

@@ -26,17 +26,36 @@ class Columns extends Collection
 
     public function names()
     {
-        return Arr::pluck($this, 'name');
+        return $this->lists('name');
     }
 
     public function tableable()
     {
-        return $this->whereProp('table');
+        return $this->ordered()->whereProp('table');
+    }
+
+
+    public function editable()
+    {
+        return $this->whereProp('editable');
     }
 
     public function dbable()
     {
         return $this->whereProp('database');
+    }
+
+    public function ordered()
+    {
+        $collection = $this;
+        foreach($collection as $k => $column) {
+            if ($column->insert_last) {
+                unset($collection[$k]);
+                $collection[$k] = $column;
+            }
+        }
+
+        return $collection;
     }
 
     public function nonRelationable()
@@ -51,11 +70,6 @@ class Columns extends Collection
         return $this->filter(function ($column) {
             return $column->relationable();
         });
-    }
-
-    public function editable()
-    {
-        return $this->whereProp('editable');
     }
 
     public function whereProp($k, $v = true)
