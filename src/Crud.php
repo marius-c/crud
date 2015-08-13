@@ -194,6 +194,11 @@ class Crud
         return $this->options(compact('events'));
     }
 
+    public function actions(array $actions = [])
+    {
+        return $this->options(compact('actions'));
+    }
+
     /**
      * @param  array $columns
      * @return self
