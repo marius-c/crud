@@ -72,6 +72,9 @@ class Column
         'ng-model'            => null,
         'file_empty_slots'    => 1,
 
+        // Highlight the column contents if it matches the search terms
+        'highlight'           => true,
+
         // Add the column before another column.
         // @todo
         'insert_before'       => null,

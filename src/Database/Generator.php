@@ -210,14 +210,17 @@ class Generator
 
         $s = isset($columnsSearch[$column->name]) ? $columnsSearch[$column->name][1] : '';
 
-        if ($column->isTextBased()) {
+        if ($column->isTextBased() && $column->highlight) {
             $filters = [];
+
             if ($s) {
                 $filters[] = preg_quote($s);
             }
+
             if ($this->crud->request['search.value']) {
                 $filters[] = preg_quote($this->crud->request['search.value']);
             }
+
             if ($filters) {
                 $regex = '#('.implode('|', $filters).')#si';
                 $replace = function ($matches) {
