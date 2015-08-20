@@ -64,9 +64,16 @@ class Actions extends ArrayProxy
 
     public function tag($tag)
     {
-        return $this->items->filter(function (Action $action) use ($tag) {
+        return $this->decorate($this->items->filter(function (Action $action) use ($tag) {
             return $action->taggedAs($tag);
-        });
+        }));
+    }
+
+    public function visible()
+    {
+        return $this->decorate($this->items->filter(function (Action $action) {
+            return $action->show && !$action->hide;
+        }));
     }
 
     public function name($name)
@@ -78,9 +85,10 @@ class Actions extends ArrayProxy
 
     public function set($name, $options)
     {
-        if ($options) {
+        if ($options && !($options instanceof Action)) {
             $options = new Action($this->crud, $name, $options);
         }
+
         $this[strtolower($name)] = $options;
 
         return $options;
@@ -89,6 +97,11 @@ class Actions extends ArrayProxy
     public function getProxifiedArray()
     {
         return $this->items;
+    }
+
+    public function decorate(Collection $collection)
+    {
+        return new static($this->crud, $collection->all());
     }
 
 }

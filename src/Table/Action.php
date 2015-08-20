@@ -180,6 +180,11 @@ class Action
         return $this->options[$k];
     }
 
+    public function __set($k, $v)
+    {
+        $this->options[$k] = $v;
+    }
+
     public function __isset($k)
     {
         return isset($this->options[$k]);

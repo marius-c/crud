@@ -423,7 +423,7 @@ class Crud
 
     public function shouldDisplayRowsActions()
     {
-        return $this->options['row_actions_enabled'] && $this->actions->tag('row')->count();
+        return $this->options['row_actions_enabled'] && $this->actions->tag('row')->visible()->count();
     }
 
     public function getTitle()

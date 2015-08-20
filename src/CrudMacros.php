@@ -45,6 +45,21 @@ trait CrudMacros
         return $this;
     }
 
+    /**
+     * Hide the actions but do not remove them.
+     *
+     * @return $this
+     */
+    public function hideDefaultActions()
+    {
+        foreach (['create', 'edit', 'delete'] as $action) {
+            $this->actions[$action]->show = false;
+        }
+
+        return $this;
+    }
+
+
     public function onlyDeleteAction()
     {
         $this->actions['edit'] = false;
