@@ -30,8 +30,6 @@ use Ionut\Crud\View\Presenter;
  */
 class Application extends Container
 {
-    use ApplicationCompatibility;
-
     /**
      * @var string
      */
@@ -86,30 +84,22 @@ class Application extends Container
         $this->baseProviders = array_diff($this->baseProviders, [$provider]);
     }
 
-    /**
-     *
-     */
     public function boot()
     {
         $this['app'] = $this;
         $this['env'] = 'production';
-//        $this['request'] = $this->captureRequest();
         $this->setPaths();
+
+        $this->setCompatibility('5');
 
         if (file_exists($helpers = 'vendor/laravel/framework/src/Illuminate/Support/helpers.php')) {
             require $helpers;
         }
 
-
         $this->registerBaseProviders();
 
         $this->bootProviders();
         $this->bladeCompatibility();
-
-//        $this->bootRequest();
-//		$this->bootSession();
-
-
 
         $this->bind('response', function () {
             return new Response();
@@ -120,6 +110,11 @@ class Application extends Container
         self::app('app', $this);
 
         $this->registerCoreContainerAliases();
+    }
+
+    public function setCompatibility($version)
+    {
+        $this['compatibility'] = new Compatibility($version);
     }
 
     public function setBaseApp(Container $app)
@@ -140,12 +135,8 @@ class Application extends Container
         $this['session.store'] = $request->getSession();
     }
 
-    /**
-     *
-     */
     public function bladeCompatibility()
     {
-
         $compiler = $this['view']->getEngineResolver()->resolve('blade')->getCompiler();
         $compiler->setContentTags('{!!', '!!}');        // for variables and all things Blade
         $compiler->setEscapedContentTags('{{', '}}');   // for escaped data
