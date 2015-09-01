@@ -110,6 +110,10 @@ class Application extends Container
         self::app('app', $this);
 
         $this->registerCoreContainerAliases();
+
+        if ( ! $this->bound('request')) {
+            $this->createIndependentRequest();
+        }
     }
 
     public function setCompatibility($version)
@@ -128,11 +132,18 @@ class Application extends Container
         return $this['base_app'] ?: $this;
     }
 
-    public function useExistingRequest(\Illuminate\Http\Request $request)
+    public function createIndependentRequest()
     {
         $this['request'] = Request::capture();
-        $this['request']->setSession($request->getSession());
-        $this['session.store'] = $request->getSession();
+    }
+
+    public function useExistingRequest(\Illuminate\Http\Request $request)
+    {
+        if ($request->getSession()) {
+            $this['request'] = Request::capture();
+            $this['request']->setSession($request->getSession());
+            $this['session.store'] = $request->getSession();
+        }
     }
 
     public function bladeCompatibility()
