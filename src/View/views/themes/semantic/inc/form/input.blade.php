@@ -78,9 +78,16 @@
                 {{$column->labeled}}
             </div>
         @endif
-        <input placeholder="{{$column->placeholder}}"
-               {!!$column->inputAttr($crud->form->getValue($column))!!} type="text" id="{{$column->name}}"
-               name="{{$column->name}}" {{$column->required ? 'required' : ''}}"/>
+
+        <input
+            @if($column->placeholder)placeholder="{{$column->placeholder}}"@endif
+            {!!$column->inputAttr($crud->form->getValue($column))!!}
+            type="text"
+            id="{{$column->name}}"
+            name="{{$column->name}}"
+            {{$column->required ? 'required' : ''}}
+        />
+
         @if($column->labeled_right)
             <div class="ui {{$column->labeled_class}} label">
                 {{$column->labeled_right}}

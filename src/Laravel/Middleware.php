@@ -18,7 +18,7 @@ class Middleware
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-        if ($response instanceof RedirectResponse) {
+        if (app()->runningInConsole() || $response instanceof RedirectResponse) {
             return $response;
         }
 

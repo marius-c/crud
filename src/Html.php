@@ -13,7 +13,7 @@ class Html
                 }
             } else {
                 if (!is_array($value)) {
-                    $output .= sprintf('%s="%s"', $name, $value);
+                    $output .= sprintf('%s="%s" ', $name, $value);
                 }
             }
         }

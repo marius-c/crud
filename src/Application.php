@@ -49,7 +49,6 @@ class Application extends Container
         FilesystemServiceProvider::class,
         EventServiceProvider::class,
         ViewServiceProvider::class,
-        DatabaseServiceProvider::class,
         RoutingServiceProvider::class,
         CrudServiceProvider::class,
         CookieServiceProvider::class,
@@ -140,8 +139,10 @@ class Application extends Container
     public function useExistingRequest(\Illuminate\Http\Request $request)
     {
         if ($request->getSession()) {
-            $this['request'] = Request::capture();
-            $this['request']->setSession($request->getSession());
+            //
+            //            $this['request'] = Request::capture();
+            //            $this['request']->setSession($request->getSession());
+            $this['request'] = clone $request;
             $this['session.store'] = $request->getSession();
         }
     }

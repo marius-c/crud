@@ -365,8 +365,9 @@ class Crud
             'Save'   => [
                 'attr'     => [
                     'onclick' => "$(this).closest('form').submit()",
-                    'href'    => '#'
+                    'type'    => 'submit'
                 ],
+                'html_tag' => 'button',
                 'class'    => 'ui submit blue button',
                 'tag'      => 'form',
                 'label'    => 'Save',
@@ -469,6 +470,12 @@ class Crud
             die;
         }
     }
+
+    public function render()
+    {
+        return $this->router->iframe();
+    }
+
 
     public function boot()
     {

@@ -31,7 +31,6 @@ class Save
 
         $row = $request_row ? clone $request_row : clone $this->crud->model;
 
-
         foreach ($this->crud->columns->editable() as $column) {
             if ($inline = $request->get('inline')) {
                 if ($inline != $column->name) {
@@ -78,6 +77,7 @@ class Save
                 }
             }
         }
+
         $row->save();
 
         return $row;

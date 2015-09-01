@@ -26,6 +26,7 @@ class Action
         'ajax'          => false,
         'decorator'     => null,
         'order'         => 2,
+        'html_tag'      => 'a'
     ];
 
     function __construct(Crud $crud, $name, $options)
@@ -148,7 +149,8 @@ class Action
         $attr['confirm'] = $this->options['confirm'] ? 1 : 0;
         $attr['ajax'] = $this->options['ajax'] ? 1 : 0;
         $attr = Html::attr($attr + $this->options['attr'] + compact('class', 'href'));
-        $html = '<a '.$attr.' crud-action="'.$this->name.'">'.$this->getLabel($row).'</a>';
+        $label = $this->getLabel($row);
+        $html = "<{$this->html_tag} {$attr} crud-action=\"{$this->name}\">{$label}</{$this->html_tag}>";
         if ($this->options['mutator']) {
             $html = $this->options['mutator']($html, $row);
         }

@@ -37,6 +37,9 @@ class HttpKernel
      */
     public function dispatch($response)
     {
+        if (app()->runningInConsole()) {
+            return $response;
+        }
 
         if ($this->fullDispatchAllowed()) {
             $response = $this->prepareResponse($response);
