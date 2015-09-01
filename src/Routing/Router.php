@@ -42,6 +42,7 @@ class Router extends ArrayProxy
             'validate'   => [$this->controller, 'validate'],
             'table'      => [$this->controller, 'table'],
             'action'     => [$this->controller, 'action'],
+            'disabled'   => [$this->controller, 'disabled'],
             'default'    => $this->defaultAction()
         ];
     }
@@ -50,6 +51,7 @@ class Router extends ArrayProxy
     {
         if (!$this->isAllowedDefault()) {
             return function () {
+                return $this->crud->app['redirect']->back();
             };
         }
 
@@ -94,7 +96,7 @@ class Router extends ArrayProxy
 
         $route = $this->match();
         if (in_array($route->name, $this->disableds)) {
-            return $this->crud->app['redirect']->back();
+            $route = $this['disabled'];
         }
 
         $result = $this->crud->events->fire('before:route-dispatch');

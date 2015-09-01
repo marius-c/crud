@@ -14,23 +14,22 @@ trait CrudMacros
         return $this;
     }
 
-    public function formFocusMode()
-    {
-        $this->actions['back'] = false;
-        $this->router->disableTableRoute();
-
-        return $this;
-    }
-
     public function setEditFocused($row)
     {
-        $this->formFocusMode();
+        $this->actions['back'] = false;
 
         $this->router['default']->callback = function () use ($row) {
             $url = $this->actions['edit']->url($row->id);
 
             return $this->router['iframe']($url);
         };
+
+        $this->router['table']->callback = function () use($row) {
+            $url = $this->actions['edit']->url($row->id);
+
+            return $this->app['redirect']->to($url);
+        };
+
         $this->options['iframe_preload'] = false;
 
         return $this;

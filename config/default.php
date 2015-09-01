@@ -13,6 +13,8 @@ return [
 	'app' => [
 		'locale' => 'en',
 		'fallback_locale' => 'en',
+		'key' => 'F1ejeEGoiSTu6GRtZQTrLjMxWLIZ4DFI',
+		'cipher' => 'AES-256-CBC'
 	],
     'attachments' => [
         'model' => 'App\Models\Attachment',

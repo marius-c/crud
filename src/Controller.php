@@ -33,6 +33,11 @@ class Controller
         return $this->crud->getDataGenerator()->response();
     }
 
+    public function disabled()
+    {
+        return $this->crud->app['redirect']->back();;
+    }
+
     /**
      * @return mixed
      */
@@ -64,6 +69,7 @@ class Controller
             return $this->crud->redirect->to($this->crud->url());
         };
     }
+
 
     /**
      * It's an action.
