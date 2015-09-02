@@ -175,6 +175,14 @@ class Column
             $attr['ng-model'] = $this->options['ng-model'];
         }
 
+        if ($this->options['input'] == 'date') {
+            $attr['class'] = 'datepicker';
+        }
+
+        if ($this->options['input'] == 'datetime') {
+            $attr['class'] = 'datetimepicker';
+        }
+
         $attr = array_map('e', $attr);
 
         return Html::attr($attr);

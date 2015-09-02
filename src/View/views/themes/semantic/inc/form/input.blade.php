@@ -68,7 +68,7 @@
            name="{{$column->name}}">
 @endif
 
-@if($input == 'text')
+@if(in_array($input, ['text', 'date']))
     <div class="ui fluid{{$column->input_action ? ' action' : ''}}{{$column->input_icon ? ' left icon' : ''}}{{$column->input_right_icon ? ' right icon' : ''}}{{$column->labeled ? ' labeled' : ''}}{{$column->labeled_right ? ' right labeled' : ''}} input">
         @if($column->input_icon)
             <i class="{{$column->input_icon}} icon"></i>
@@ -100,11 +100,6 @@
     </div>
 @endif
 
-@if($input == 'datetime')
-    <input {!!$column->inputAttr($crud->form->getValue($column))!!} class="datetimepicker" type="text"
-           id="{{$column->name}}" name="{{$column->name}}" {{$column->required ? 'required' : ''}}/>
-@endif
-
 @if($input == 'interval')
     <div class="ui two column grid">
         <div class="column" style="width:20%;">
@@ -118,9 +113,4 @@
                    name="{{$column->name}}[to]" {{$column->required ? 'required' : ''}}/>
         </div>
     </div>
-@endif
-
-@if($input == 'date')
-    <input {!!$column->inputAttr($crud->form->getValue($column))!!} class="datepicker" type="text"
-           id="{{$column->name}}" name="{{$column->name}}" {{$column->required ? 'required' : ''}}/>
 @endif
