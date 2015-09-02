@@ -83,7 +83,10 @@ class Column
         'insert_after'        => null,
 
         // Insert the column at the end
-        'insert_last'         => false
+        'insert_last'         => false,
+
+        // Used on the input='date' types.
+        'date_format' => 'Y-m-d'
     ];
 
     public function __construct($name, array $options, array $overrideDefaults = [])
@@ -177,6 +180,7 @@ class Column
 
         if ($this->options['input'] == 'date') {
             $attr['class'] = 'datepicker';
+            $attr['value'] = (new \DateTime($attr['value']))->format($this->date_format);
         }
 
         if ($this->options['input'] == 'datetime') {
