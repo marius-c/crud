@@ -38,6 +38,7 @@ class Save
                 }
             }
 
+
             if ($column->allowModelBinding()) {
                 if ($column->input == 'checkbox') {
                     $row->{$column->name} = $request->has($column->name);

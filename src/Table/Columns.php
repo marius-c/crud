@@ -6,10 +6,11 @@ use Illuminate\Support\Collection;
 class Columns extends Collection
 {
     protected $propsCache = [];
+
     /**
      * @var array
      */
-    private $overrideDefaults;
+    protected $overrideDefaults;
 
     public function __construct($columns = [], array $overrideDefaults = null)
     {
@@ -26,7 +27,7 @@ class Columns extends Collection
 
     public function names()
     {
-        return $this->lists('name');
+        return array_pluck($this->items, 'name');
     }
 
     public function tableable()

@@ -395,8 +395,8 @@ class Crud
     {
         return $this->request->url().'?'.http_build_query($params + [
                 'crud'  => $this->id,
-                'route' => 'table'
-            ] + $this->request->all());
+                'route' => 'table',
+            ]);
     }
 
     /**
@@ -595,12 +595,16 @@ class Crud
             'decorator' => $column->expandableDecorator()
         ]);
         $column->expandable_action = $action;
-        if (!isset($columns[$column->name]['form']) || !$columns[$column->name]['form']) {
+
+        if (!isset($columns[$column->name]->form) || !$columns[$column->name]->form) {
             $column->form = 0;
         }
-        if (!isset($columns[$column->name]['database']) || !$columns[$column->name]['database']) {
+
+        if (!isset($columns[$column->name]->database) || !$columns[$column->name]->database) {
             $column->database = 0;
         }
+
+        $column->highlight = 0;
     }
 
     public function __call($k, $args)
