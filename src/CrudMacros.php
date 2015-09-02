@@ -80,9 +80,19 @@ trait CrudMacros
 
     public function action($k, $v)
     {
-        $this->actions[$k] = new Action($this, $k, $v);
+        if ($v === false) {
+            unset($this->actions[$k]);
+        }
+        else {
+            $this->actions[$k] = new Action($this, $k, $v);
+        }
 
         return $this;
+    }
+
+    public function removeAction($k)
+    {
+        return $this->action($k, false);
     }
 
     public function attachToggleButtons(CrudToggleButtons $buttons)
