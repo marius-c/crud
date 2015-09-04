@@ -2,34 +2,39 @@
 <?php if (!isset($editable)) $editable = $column->editable; ?>
 
 
+<?php
+$value = $crud->form->getValue($column);
+?>
+
+
 @if($input == 'custom_html')
     {!!$column->input_custom_html!!}
 @endif
 
 @if($input == 'select')
     <select multiple id="{{$column->name}}"
-            name="{{$column->name}}" {!!$column->inputAttr($crud->form->getValue($column))!!}>
+            name="{{$column->name}}" {!!$column->inputAttr($value)!!}>
         <option value="">{{$column->input_label}}</option>
         @foreach($crud->form->value($column->options) as $k => $v)
-            <option value="{{$k}}" {{$crud->form->getValue($column) == $k ? 'selected' : ''}}>{{$v}}</option>
+            <option value="{{$k}}" {{$value == $k ? 'selected' : ''}}>{{$v}}</option>
         @endforeach
     </select>
 @endif
 
 @if($input == 'chosen')
     <select data-placeholder="{{$column->input_label}}" class="chosen" id="{{$column->name}}"
-            name="{{$column->name}}" {!!$column->inputAttr($crud->form->getValue($column))!!}>
+            name="{{$column->name}}" {!!$column->inputAttr($value)!!}>
         @foreach($crud->form->value($column->options) as $k => $v)
-            <option value="{{$k}}" {{$crud->form->getValue($column) == $k ? 'selected' : ''}}>{{$v}}</option>
+            <option value="{{$k}}" {{$value == $k ? 'selected' : ''}}>{{$v}}</option>
         @endforeach
     </select>
 @endif
 
 @if($input == 'chosen-multiple' || $input == 'multiselect')
     <select multiple data-placeholder="{{$column->input_label}}" class="chosen" id="{{$column->name}}"
-            name="{{$column->name}}[]" {!!$column->inputAttr($crud->form->getValue($column))!!}>
+            name="{{$column->name}}[]" {!!$column->inputAttr($value)!!}>
         @foreach($crud->form->value($column->options) as $k => $v)
-            <option value="{{$k}}" {{in_array($k, $crud->form->getValue($column))  ? 'selected' : ''}}>{{$v}}</option>
+            <option value="{{$k}}" {{in_array($k, $value)  ? 'selected' : ''}}>{{$v}}</option>
         @endforeach
     </select>
 @endif
@@ -50,21 +55,21 @@
 
 @if($input == 'tags')
     <input class="tags" id="{{$column->name}}"
-           name="{{$column->name}}" {!!$column->inputAttr($crud->form->getValue($column))!!}/>
+           name="{{$column->name}}" {!!$column->inputAttr($value)!!}/>
 @endif
 
 @if($input == 'textarea')
-    <textarea {!!$column->inputAttr($crud->form->getValue($column))!!} id="{{$column->name}}"
-              name="{{$column->name}}" {{$column->required ? 'required' : ''}}>{{$crud->form->getValue($column)}}</textarea>
+    <textarea {!!$column->inputAttr($value)!!} id="{{$column->name}}"
+              name="{{$column->name}}" {{$column->required ? 'required' : ''}}>{{$value}}</textarea>
 @endif
 
 @if($input == 'html')
-    <textarea class="html" {!!$column->inputAttr($crud->form->getValue($column))!!} id="{{$column->name}}"
-              name="{{$column->name}}" {{$column->required ? 'required' : ''}}>{{$crud->form->getValue($column)}}</textarea>
+    <textarea class="html" {!!$column->inputAttr($value)!!} id="{{$column->name}}"
+              name="{{$column->name}}" {{$column->required ? 'required' : ''}}>{{$value}}</textarea>
 @endif
 
 @if($input == 'checkbox')
-    <input {!!$column->inputAttr()!!} {{$crud->form->getValue($column) ? 'checked ' : ''}}type="checkbox"
+    <input {!!$column->inputAttr()!!} {{$value ? 'checked ' : ''}}type="checkbox"
            name="{{$column->name}}">
 @endif
 
@@ -81,7 +86,7 @@
 
         <input
             @if($column->placeholder)placeholder="{{$column->placeholder}}"@endif
-            {!!$column->inputAttr($crud->form->getValue($column))!!}
+            {!!$column->inputAttr($value)!!}
             type="text"
             id="{{$column->name}}"
             name="{{$column->name}}"
@@ -104,12 +109,12 @@
     <div class="ui two column grid">
         <div class="column" style="width:20%;">
             <input interval="{{$column->name}}" placeholder="From"
-                   {!!$column->inputAttr($crud->form->getValue($column))!!} type="text" id="{{$column->name}}"
+                   {!!$column->inputAttr($value)!!} type="text" id="{{$column->name}}"
                    name="{{$column->name}}[from]" {{$column->required ? 'required' : ''}}/>
         </div>
         <div class="column" style="width:20%;">
             <input interval="{{$column->name}}" placeholder="To"
-                   {!!$column->inputAttr($crud->form->getValue($column))!!} type="text" id="{{$column->name}}"
+                   {!!$column->inputAttr($value)!!} type="text" id="{{$column->name}}"
                    name="{{$column->name}}[to]" {{$column->required ? 'required' : ''}}/>
         </div>
     </div>
