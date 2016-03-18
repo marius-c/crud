@@ -15,9 +15,6 @@
 
 <!-- FileSlots package  -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
-<script src="https://raw.githubusercontent.com/IonutBajescu/fileslots.js/master/src/slots.js"></script>
-<link rel="stylesheet" type="text/css"
-      href="https://raw.githubusercontent.com/IonutBajescu/fileslots.js/master/dist/slots.min.css"/>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.12/angular.min.js"></script>
 <script src="//cdn.jsdelivr.net/angular.initial-value/latest/angular-initial-value.min.js"></script>
@@ -25,7 +22,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.8.1/semantic.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.8.1/semantic.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.1/jquery.datetimepicker.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.0/jquery.datetimepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.1/jquery.datetimepicker.css"/>
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"/>
