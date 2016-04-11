@@ -55,5 +55,4 @@
         });
     }
     attachExpandableEvent();
-    afterDatatablesCallbacks.push(attachExpandableEvent);
 </script>
