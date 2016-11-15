@@ -46,7 +46,7 @@
     @include('themes.semantic.inc.table.advanced-search-form')
 
     {!!$crud->tableStyle->getBefore()!!}
-    <table id="crud{{$crud->id}}" class="ui crud table" style="width:100%!important">
+    <table id="crud{{$crud->id}}" class="ui crud table unstackable" style="width:100%!important">
         <thead>
             <tr>
                 @foreach($crud->columns->tableable() as $i => $column)
